@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/bal-singh-sde/workout-planner-backEnd/issues"
   },
-  "homepage": "https://github.com/bal-singh-sde/workout-planner-backEnd#readme"
+  "homepage": "https://github.com/bal-singh-sde/workout-planner-backEnd#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
