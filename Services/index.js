@@ -1,10 +1,14 @@
+// method to calulate calories
 function calorieCalc (gender, height , weight , age, activity) {
-    const BMR;
-    const totalCalories
+    let BMR
+    let totalCalories;
     if (gender === 'male') {
         BMR = Math.round(9.99 * weight + 6.25 * height - 4.92 * age + 5);
-    } else {
-        BMR = Math.round(9.99 * W + 6.25 * H - 4.92 * A - 161);
+    } else if (gender === 'female') {
+        BMR = Math.round(9.99 * weight + 6.25 * height - 4.92 * age - 161);
+    }
+    else {
+        BMR = 0;
     }
 
     if (activity === 'noExcercise') {
