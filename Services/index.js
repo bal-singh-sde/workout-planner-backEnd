@@ -1,43 +1,95 @@
 // method to calulate calories
-function calorieCalc (gender, height , weight , age, activity) {
-    let BMR
-    let totalCalories;
-    if (gender === 'male') {
-        BMR = Math.round(9.99 * weight + 6.25 * height - 4.92 * age + 5);
-    } else if (gender === 'female') {
-        BMR = Math.round(9.99 * weight + 6.25 * height - 4.92 * age - 161);
-    }
-    else {
-        BMR = 0;
-    }
+var axios = require("axios");
+require("../Secrets");
 
-    if (activity === 'noExcercise') {
-        totalCalories = BMR
-    }
-    
-    //1-3 times
-    if (activity === 'lowActivity') {
-        totalCalories = BMR*1.2 
-    }
+function calorieCalc(gender, height, weight, age, activity) {
+  let BMR;
+  let totalCalories;
+  if (gender === "male") {
+    BMR = Math.round(9.99 * weight + 6.25 * height - 4.92 * age + 5);
+  } else if (gender === "female") {
+    BMR = Math.round(9.99 * weight + 6.25 * height - 4.92 * age - 161);
+  } else {
+    BMR = 0;
+  }
 
-    // 3-4 times 
-    if (activity === 'active') {
-        totalCalories = BMR*1.35
-    }
+  if (activity === "noExcercise") {
+    totalCalories = BMR;
+  }
 
-    //6-7 times
-    if (activity === 'high') {
-        totalCalories = BMR*1.55
-    }
+  //1-3 times
+  if (activity === "lowActivity") {
+    totalCalories = BMR * 1.2;
+  }
 
-    // extreme
-    if (activity === 'extreme') {
-        totalCalories = BMR*1.95
-    }
+  // 3-4 times
+  if (activity === "active") {
+    totalCalories = BMR * 1.35;
+  }
 
-    return totalCalories
+  //6-7 times
+  if (activity === "high") {
+    totalCalories = BMR * 1.55;
+  }
+
+  // extreme
+  if (activity === "extreme") {
+    totalCalories = BMR * 1.95;
+  }
+  return totalCalories;
+}
+
+async function bmi(age, weight, height) {
+  var options = {
+    method: "GET",
+    url: "https://fitness-calculator.p.rapidapi.com/bmi",
+    params: { age: age, weight: weight, height: height },
+    headers: {
+      "x-rapidapi-key": process.env.X_RAPIDAPI_KEY,
+      "x-rapidapi-host": process.env.X_RAPIDAPI_HOST,
+    },
+  };
+
+  try {
+    const response = await axios.request(options);
+    let userBmi = response.data;
+    return userBmi;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+//body fat percentage
+
+async function bodyFat(age, gender, weight, height, neck, waist, hip) {
+  var options = {
+    url: "https://fitness-calculator.p.rapidapi.com/bodyfat",
+    params: {
+      age: age,
+      gender: gender,
+      heigth: height,
+      weigth: weight,
+      neck: neck,
+      waist: waist,
+      hip: hip,
+    },
+    headers: {
+      "x-rapidapi-key": process.env.X_RAPIDAPI_KEY,
+      "x-rapidapi-host": process.env.X_RAPIDAPI_HOST,
+    },
+  };
+
+  try {
+    const response = await axios.request(options);
+    let userWeight = response.data;
+    return userWeight;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 module.exports = {
-    calorieCalc
-}
+  calorieCalc,
+  bmi,
+  bodyFat,
+};
