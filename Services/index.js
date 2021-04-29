@@ -1,6 +1,8 @@
 // method to calulate calories
 var axios = require("axios");
-require("../Secrets");
+if (!process.env.PORT) {
+  require("../Secrets");
+}
 
 function calorieCalc(gender, height, weight, age, activity) {
   let BMR;
