@@ -41,6 +41,7 @@ function calorieCalc(gender, height, weight, age, activity) {
   return totalCalories;
 }
 
+//bmi
 async function bmi(age, weight, height) {
   var options = {
     method: "GET",

@@ -36,7 +36,7 @@ server.get("/bmi", async (req, res) => {
 
 //body weight
 
-server.get("/idealWeight", async (req, res) => {
+server.get("/bodyFat", async (req, res) => {
   const { height, weight, gender, age, neck, hip, waist } = req.query;
 
   var results = await bodyFat(age, gender, weight, height, neck, hip, waist);
