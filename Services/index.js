@@ -62,19 +62,18 @@ async function bmi(age, weight, height) {
   }
 }
 
-//body fat percentage
-
+//body fat percentage and more
 async function bodyFat(age, gender, weight, heigth, neck, waist, hip) {
   var options = {
     url: "https://fitness-calculator.p.rapidapi.com/bodyfat",
     params: {
-      age: age,
+      age: parseInt(age),
       gender: gender,
-      heigth: heigth,
-      weigth: weight,
-      neck: neck,
-      waist: waist,
-      hip: hip,
+      height: parseInt(heigth),
+      weight: parseInt(weight),
+      neck: parseInt(neck),
+      waist: parseInt(waist),
+      hip: parseInt(hip),
     },
     headers: {
       "x-rapidapi-key": process.env.X_RAPIDAPI_KEY,
@@ -84,8 +83,8 @@ async function bodyFat(age, gender, weight, heigth, neck, waist, hip) {
 
   try {
     const response = await axios.request(options);
-    let userWeight = response.data;
-    return userWeight;
+    let userInfo = response.data;
+    return userInfo;
   } catch (error) {
     console.error(error);
   }
