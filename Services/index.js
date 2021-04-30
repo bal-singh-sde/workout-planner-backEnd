@@ -64,13 +64,13 @@ async function bmi(age, weight, height) {
 
 //body fat percentage
 
-async function bodyFat(age, gender, weight, height, neck, waist, hip) {
+async function bodyFat(age, gender, weight, heigth, neck, waist, hip) {
   var options = {
     url: "https://fitness-calculator.p.rapidapi.com/bodyfat",
     params: {
       age: age,
       gender: gender,
-      heigth: height,
+      heigth: heigth,
       weigth: weight,
       neck: neck,
       waist: waist,
